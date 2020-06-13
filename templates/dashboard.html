@@ -1,4 +1,19 @@
 <h1 class="title">
-  Welcome, {{ name }}!
+  Welcomes, {{ name }}!
 </h1>
+<h3 class="title">Enter your Instagram information</h3>
+<form action="/add-instagram" method="POST" >
+    <input type="text" name="instagram_username" placeholder="Instagram username" autofocus="">
+    <input type="password" name="instagram_password" placeholder="Instagram password">
+    <button type="submit">Done</button>
+</form>
+{% if instagram_username %}
+
+    <ul>
+        <li>Username: {{ instagram_username }}</li>
+        <li>Password: {{ instagram_password }}</li>
+    </ul>
+
+{% endif %}
+
 <a href="{{ url_for('auth.logout') }}">Logout</a>
