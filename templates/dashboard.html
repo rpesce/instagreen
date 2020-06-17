@@ -1,5 +1,5 @@
 <h1 class="title">
-  Welcomes, {{ name }}!
+  Welcome, {{ name }}!
 </h1>
 <h3 class="title">Enter your Instagram information</h3>
 <form action="/add-instagram" method="POST" >
@@ -7,13 +7,22 @@
     <input type="password" name="instagram_password" placeholder="Instagram password">
     <button type="submit">Done</button>
 </form>
-{% if instagram_username %}
-
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="notification is-danger">
+            {{ messages[0] }}
+        </div>
+    {% endif %}
+{% endwith %}
+{% for account in instagram_accounts %}
     <ul>
-        <li>Username: {{ instagram_username }}</li>
-        <li>Password: {{ instagram_password }}</li>
+        <li>Username: {{ account.instagram_username }}</li>
+        <li>Password: {{ account.instagram_password }}</li>
+        <li>User: {{ account.user_id }}</li>
     </ul>
+{% endfor %}
 
-{% endif %}
+
+
 
 <a href="{{ url_for('auth.logout') }}">Logout</a>
